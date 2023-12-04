@@ -3,7 +3,7 @@ import CardList from "@/components/CardAnimeList";
 import HeaderMenu from "@/components/Utils/HeaderMenu";
 import Pagination from "@/components/Utils/Pagination";
 import { useEffect, useState } from "react";
-import { getAnimeResponse } from "../libs/api-libs";
+import { getAnimeResponse } from "@/libs/api-libs";
 
 const Populer = () => {
     const [page, setPage] = useState(1)

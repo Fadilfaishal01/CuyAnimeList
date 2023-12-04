@@ -1,7 +1,9 @@
-import { getAnimeResponse } from '@/app/libs/api-libs'
+import { getAnimeResponse } from '@/libs/api-libs'
 import CardPoint from '@/components/Utils/CardPoint'
+import ListDataProfileAnime from '@/components/Utils/ListDataProfileAnime'
 import VideoPlayer from '@/components/Utils/VideoPlayer'
 import Image from 'next/image'
+import Link from 'next/link'
 import React from 'react'
 
 const AnimeDetailPage = async ({ params: {id} }) => {
@@ -10,7 +12,10 @@ const AnimeDetailPage = async ({ params: {id} }) => {
    return (
       <>
          <div className='pt-4 px-4'>
-            <h3 className='text-3xl font-semibold text-color-primary'>{detailAnime.data.title}</h3>
+            <h3 className='text-3xl font-semibold text-color-primary mb-4'>{detailAnime.data.title}</h3>
+            <h5 className='text-color-primary'>Dibuat oleh Studio : <Link target='_blank' href={detailAnime.data.studios[0].url}>{detailAnime.data.studios[0].name}</Link></h5>
+            <h5 className='text-color-primary'>Genre : {ListDataProfileAnime(detailAnime.data.genres)}</h5>
+            <h5 className='text-color-primary'>Producers : {ListDataProfileAnime(detailAnime.data.producers)}</h5>
          </div>
          <div className='pt-4 px-4 flex gap-2 text-color-primary overflow-auto'>
             <CardPoint title="Peringkat" score={detailAnime.data.rank} />

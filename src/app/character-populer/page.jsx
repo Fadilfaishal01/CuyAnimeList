@@ -4,7 +4,7 @@ import CardAnimeList from '@/components/CardAnimeList'
 import HeaderMenu from '@/components/Utils/HeaderMenu'
 import Pagination from '@/components/Utils/Pagination'
 import React, { useEffect, useState } from 'react'
-import { getAnimeResponse } from '../libs/api-libs'
+import { getAnimeResponse } from '@/libs/api-libs'
 
 const CharacterPopulerPage = () => {
    const [page, setPage] = useState(1)
