@@ -3,16 +3,18 @@ const ListDataProfileAnime = (dataGenre) => {
    let valueGenre = "";
 
    if (totalData > 0) {
-      if (totalData > 1) {
-         dataGenre.map((kData, vData) => {
-            valueGenre += `${kData.name}, `
-         })
-      }
+      dataGenre.map((vData, kData) => {
+         if (kData == (totalData - 1)) {
+            valueGenre += `${vData.name}`;
+         } else {
+            valueGenre += `${vData.name}, `;
+         }
+      })
    } else {
-      valueGenre += "Tidak ada data";
+      valueGenre += "Tidak diketahui";
    }
 
-   return `${valueGenre}`;
+   return valueGenre;
 }
 
 export default ListDataProfileAnime;

@@ -10,7 +10,7 @@ const Page = async ({ params }) => {
       <>
          <div className="mx-4">
             <HeaderAnimeList titleCardList={`Pencarian Untuk ${decodeKeyword}`} />
-            <CardAnimeList dataAnime={searchAnime} type="Anime Populer" />
+            <CardAnimeList dataAnime={searchAnime} type="Populer" />
          </div>
       </>
   )

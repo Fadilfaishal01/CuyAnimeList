@@ -5,17 +5,28 @@ import VideoPlayer from '@/components/Utils/VideoPlayer'
 import Image from 'next/image'
 import Link from 'next/link'
 import React from 'react'
+import CollectionBtn from '@/components/CardAnimeList/CollectionBtn'
+import { authUserSession } from '@/libs/auth-libs'
+import prisma from '@/libs/prisma'
 
 const AnimeDetailPage = async ({ params: {id} }) => {
    const detailAnime = await getAnimeResponse(`anime/${id}`)
+   const user = await authUserSession();
+   const collection = await prisma.db_Collection.findFirst({
+      where: {
+         user_email: user?.email,
+         anime_mal_id: id
+      }
+   })
    
    return (
-      <>
+      <div className='pb-10'>
          <div className='pt-4 px-4'>
             <h3 className='text-3xl font-semibold text-color-primary mb-4'>{detailAnime.data.title}</h3>
             <h5 className='text-color-primary'>Dibuat oleh Studio : <Link target='_blank' href={detailAnime.data.studios[0].url}>{detailAnime.data.studios[0].name}</Link></h5>
             <h5 className='text-color-primary'>Genre : {ListDataProfileAnime(detailAnime.data.genres)}</h5>
             <h5 className='text-color-primary'>Producers : {ListDataProfileAnime(detailAnime.data.producers)}</h5>
+            { !collection && user && (<CollectionBtn anime_mal_id={id} user_email={user.email} />)}
          </div>
          <div className='pt-4 px-4 flex gap-2 text-color-primary overflow-auto'>
             <CardPoint title="Peringkat" score={detailAnime.data.rank} />
@@ -34,7 +45,7 @@ const AnimeDetailPage = async ({ params: {id} }) => {
                alt={detailAnime.data.images.jpg.image_url}
                width={270}
                height={270}
-               className='w-full rounded object-cover'
+               className='rounded object-cover'
             />
             <div className='px-2'>
                <p className='text-2xl font-bold'>Description</p>
@@ -44,7 +55,7 @@ const AnimeDetailPage = async ({ params: {id} }) => {
          <div>
             <VideoPlayer youtubeId={detailAnime.data.trailer.youtube_id} />
          </div>
-      </>
+      </div>
    )
 }
 
