@@ -53,7 +53,7 @@ const AnimeDetailPage = async ({ params: {id} }) => {
             </div>
          </div>
          <div>
-            <VideoPlayer youtubeId={detailAnime.data.trailer.youtube_id} />
+            {detailAnime.data.trailer.youtube_id && (<VideoPlayer youtubeId={detailAnime.data.trailer.youtube_id} />)}
          </div>
       </div>
    )
