@@ -6,7 +6,7 @@ import React from 'react'
 
 const Page = async () => {
   const user = await authUserSession();  
-  const collection = await prisma.db_Collection.findMany({
+  const collection = await prisma.tb_Collection.findMany({
     where: {
       user_email: user?.email
     }

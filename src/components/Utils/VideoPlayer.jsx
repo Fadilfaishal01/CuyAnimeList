@@ -12,6 +12,10 @@ const VideoPlayer = ({ youtubeId }) => {
    const options = {
       width: "300",
       height: "250",
+      playerVars: {
+         // https://developers.google.com/youtube/player_parameters
+         autoplay: 1,
+      },
    }
 
    const Player = () => {
@@ -20,7 +24,7 @@ const VideoPlayer = ({ youtubeId }) => {
             <button onClick={handleVideoPlayer} className='text-color-primary float-right bg-color-secondary px-3 mb-1'>
                X
             </button>
-            <Youtube 
+            <Youtube
                videoId={youtubeId} 
                onReady={(event) => event.target.pauseVideo()} 
                opts={options}

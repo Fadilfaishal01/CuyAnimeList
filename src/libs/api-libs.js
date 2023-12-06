@@ -1,5 +1,18 @@
-export const getAnimeResponse = async (resource, query) => {
-   const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/${resource}?${query}`)
+export const getAnimeResponse = async (resource, query = null) => {
+   let apiUrl;
+   
+   if (query) {
+      apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${resource}?${query}`
+   } else {
+      apiUrl = `${process.env.NEXT_PUBLIC_API_URL}/${resource}`
+   }
+
+   const response = await fetch(apiUrl, {
+      next: {
+         revalidate: 3600
+      }
+   })
+   
    const data = await response.json()
 
    return data

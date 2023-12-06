@@ -3,13 +3,22 @@
 import { Plus } from "@phosphor-icons/react";
 import { useRouter } from "next/navigation";
 
-const CollectionBtn = ({ anime_mal_id, user_email }) => {
+const CollectionBtn = ({ dataAnime, user_email }) => {
    const router = useRouter()
+   
    const handleCollection = async (e) => {
       e.preventDefault();
+      
+      const dataGenres = dataAnime.data.genres.map((item) => {
+         return item.name
+      })
+
       const params = {
-         anime_mal_id,
-         user_email
+         anime_mal_id: String(dataAnime.data.mal_id),
+         anime_title: dataAnime.data.title,
+         anime_image: dataAnime.data.images.webp.image_url,
+         anime_genres: JSON.stringify(dataGenres),
+         user_email: user_email,
       }
 
       const collection = await fetch(`/api/v1/collection`, {
